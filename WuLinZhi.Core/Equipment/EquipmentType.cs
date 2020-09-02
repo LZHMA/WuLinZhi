@@ -4,8 +4,11 @@ using System.Text;
 
 namespace WuLinZhi.Core.Equipment
 {
-    class Weapon:EquipmentBase
+    public enum EquipmentType
     {
-
+        Weapon,
+        Armor,
+        Shoes,
+        Artifact,
     }
 }

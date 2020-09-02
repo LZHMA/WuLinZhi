@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WuLinZhi", "WuLinZhi\WuLinZhi.csproj", "{B3DE63D5-C262-4E9F-AD22-4E42A63D26DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WuLinZhi", "WuLinZhi\WuLinZhi.csproj", "{B3DE63D5-C262-4E9F-AD22-4E42A63D26DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WuLinZhi.Core", "WuLinZhi.Core\WuLinZhi.Core.csproj", "{AEB4E714-FB5B-4E3A-AE7F-00CDDF2D69B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WuLinZhi.Core", "WuLinZhi.Core\WuLinZhi.Core.csproj", "{AEB4E714-FB5B-4E3A-AE7F-00CDDF2D69B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WuLinZhi.Test", "WuLinZhi.Test\WuLinZhi.Test.csproj", "{FBE7D663-E635-46BF-9F97-92D7B85366A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WuLinZhi.Test", "WuLinZhi.Test\WuLinZhi.Test.csproj", "{FBE7D663-E635-46BF-9F97-92D7B85366A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WuLinZhi.Lab", "WuLinZhi.Lab\WuLinZhi.Lab.csproj", "{9C6F4BFF-0AB1-4FC6-8520-408D1653D623}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{FBE7D663-E635-46BF-9F97-92D7B85366A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBE7D663-E635-46BF-9F97-92D7B85366A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBE7D663-E635-46BF-9F97-92D7B85366A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C6F4BFF-0AB1-4FC6-8520-408D1653D623}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C6F4BFF-0AB1-4FC6-8520-408D1653D623}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C6F4BFF-0AB1-4FC6-8520-408D1653D623}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C6F4BFF-0AB1-4FC6-8520-408D1653D623}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,12 @@
+{
+  "XuanyuanSword": {
+    "Name": "轩辕剑",
+    "HP": 200,
+    "MP": 100,
+    "Vitiality": 50,
+    "Strength": 30,
+    "Agility": 40,
+    "Price": 10,
+    "Type": 0
+  }
+}

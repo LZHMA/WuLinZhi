@@ -4,12 +4,12 @@ using System.Text;
 
 namespace WuLinZhi.Core.Force
 {
-    class ForceBase
+    public class ForceBase
     {
         #region field
         private int _potentialHP;
         private int _potentialMP;
-        private int _potentialVitiality;
+        private int _potentialVitality;
         private int _potentialStrength;
         private int _potentialAgility;
         #endregion
@@ -24,7 +24,7 @@ namespace WuLinZhi.Core.Force
 
         public int HP { get => Grade / 10 * _potentialHP; }
         public int MP { get => Grade / 10 * _potentialMP; }
-        public int Vitality { get => Grade / 10 * _potentialVitiality; }
+        public int Vitality { get => Grade / 10 * _potentialVitality; }
         public int Strength { get => Grade / 10 * _potentialStrength; }
         public int Agility { get => Grade / 10 * _potentialAgility; }
 
@@ -37,7 +37,7 @@ namespace WuLinZhi.Core.Force
 
     }
 
-    enum ForceLevel
+    public enum ForceLevel
     {
         One,
         Two,
