@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WuLinZhi.Core.Effect
+namespace WuLinZhi.Core.Character
 {
-    class Effect
+    interface IFightable
     {
     }
 }

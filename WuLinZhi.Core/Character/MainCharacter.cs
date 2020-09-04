@@ -8,17 +8,11 @@ using WuLinZhi.Core.Force;
 
 namespace WuLinZhi.Core.Character
 {
-    public class MainCharacter
+    public class MainCharacter:IFightable
     {
-        #region field
-        private int _hp;
-        private int _mp;
-        private int _vitality;
-        private int _strength;
-        private int _agility;
-        #endregion
-
         #region property
+        public string Name{get;set;}
+
         public int HPBase { get; set; }
         public int HPEquipment { get; set; }
         public int HPForce { get; set; }
@@ -26,7 +20,6 @@ namespace WuLinZhi.Core.Character
         public int HP
         {
             get => (HPBase + HPEquipment + HPForce) * (100 + HPAmplification) / 100;
-            set => _hp = value;
         }
 
         public int MPBase { get; set; }
@@ -36,7 +29,6 @@ namespace WuLinZhi.Core.Character
         public int MP
         {
             get => (MPBase + MPEquipment + MPForce) * (100 + MPAmplification) / 100;
-            set => _mp = value;
         }
 
         public int VitalityBase { get; set; }
@@ -46,7 +38,6 @@ namespace WuLinZhi.Core.Character
         public int Vitality
         {
             get => (VitalityBase + VitalityEquipment + VitalityForce) * (100 + VitalityAmplification) / 100;
-            set => _vitality = value;
         }
 
         public int StrengthBase { get; set; }
@@ -56,7 +47,6 @@ namespace WuLinZhi.Core.Character
         public int Strength
         {
             get => (StrengthBase + StrengthEquipment + StrengthForce) * (100 + StrengthAmplification) / 100;
-            set => _strength = value;
         }
 
         public int AgilityBase { get; set; }
@@ -66,7 +56,6 @@ namespace WuLinZhi.Core.Character
         public int Agility
         {
             get => (AgilityBase + AgilityEquipment + AgilityForce) * (100 + AgilityAmplification) / 100;
-            set => _agility = value;
         }
 
         public int Attack { get; set; }

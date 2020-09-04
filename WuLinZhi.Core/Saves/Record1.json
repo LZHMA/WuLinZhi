@@ -1,6 +1,7 @@
 {
     "Title": "Test Profile",
-    "Profile": {
+    "Record": {
+        "Name":"笑剑钝",
         "HPBase": 2000,
         "MPBase": 1000
     }
