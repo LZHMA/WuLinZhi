@@ -99,5 +99,10 @@ namespace WuLinZhi.Core.Character
             var json=JsonSerializer.Serialize<MainCharacter>(this,options);
             return json;
         }
+
+        public MainCharacter ShallowClone()
+        {
+            return this.MemberwiseClone() as MainCharacter;
+        }
     }
 }

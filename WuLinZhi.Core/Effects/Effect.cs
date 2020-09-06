@@ -7,6 +7,7 @@ namespace WuLinZhi.Core.Effects
     public abstract class Effect
     {
         public string Name { get; set; }
+        public EffectOccasion Occasion { get; set; }
         public int Chance { get; set; }
 
         public bool Trigger()
@@ -16,5 +17,13 @@ namespace WuLinZhi.Core.Effects
         }
 
         public abstract void TakeEffect();
+    }
+
+    public enum EffectOccasion
+    {
+        RoundStart,
+        Attacting,
+        Attacted,
+        RoundEnd,
     }
 }

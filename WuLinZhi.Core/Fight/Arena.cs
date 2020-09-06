@@ -12,6 +12,7 @@ namespace WuLinZhi.Core.Fight
 
         private int _mainCharacterHPCurrent;
         private int _mainCharacterMPCurrent;
+        private int _mainCharacterShield;
 
         public Arena(MainCharacter mainCharacter, NPC npc)
         {
@@ -42,6 +43,15 @@ namespace WuLinZhi.Core.Fight
             set
             {
                 _mainCharacterMPCurrent = value < MainCharacterMPUpperLimit ? value : MainCharacterMPUpperLimit;
+            }
+        }
+
+        public int MainCharacterShield
+        {
+            get => _mainCharacterShield;
+            set
+            {
+                _mainCharacterShield = value > 0 ? value : 0;
             }
         }
 
