@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WuLinZhi.Core;
+using WuLinZhi.Core.Character;
+using WuLinZhi.Core.Equipment;
 
 namespace WuLinZhi
 {
@@ -23,6 +26,33 @@ namespace WuLinZhi
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void NewGame(object sender, RoutedEventArgs e)
+        {
+            var me = new MainCharacter
+            {
+                Name = "LZHMA",
+                HPBase = 2000,
+                HPAmplification = 0,
+                MPBase = 1000,
+                MPAmplification = 0,
+                VitalityBase = 300,
+                StrengthBase = 260,
+                AgilityBase = 200,
+                Weapon = new EquipmentBase
+                {
+                    Name = "轩辕剑",
+                    Type = EquipmentType.Weapon,
+                    HP = 200,
+                    MP = 100,
+                    Vitiality = 50,
+                    Strength = 30,
+                    Agility = 40,
+                    Price = 10,
+                }
+            };
+            this.characterName.SetBinding(TextBlock.TextProperty, new Binding("Name") { Source = me });
         }
     }
 }

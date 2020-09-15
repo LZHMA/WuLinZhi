@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Text.Json;
 using System.Text.Unicode;
@@ -8,54 +9,77 @@ using WuLinZhi.Core.Force;
 
 namespace WuLinZhi.Core.Character
 {
-    public class MainCharacter:IFightable
+    public class MainCharacter : IFightable, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        private string _name;
         #region property
-        public string Name{get;set;}
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                if(this.PropertyChanged!=null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Name"));
+                }
+            }
+        }
 
         public int HPBase { get; set; }
-        public int HPEquipment { get; set; }
-        public int HPForce { get; set; }
+        public int HPEquipment
+        {
+            get => Weapon.HP + Armor.HP + Shoes.HP;
+        }
         public int HPAmplification { get; set; }
         public int HP
         {
-            get => (HPBase + HPEquipment + HPForce) * (100 + HPAmplification) / 100;
+            get => (HPBase + HPEquipment) * (100 + HPAmplification) / 100;
         }
 
         public int MPBase { get; set; }
-        public int MPEquipment { get; set; }
-        public int MPForce { get; set; }
+        public int MPEquipment
+        {
+            get => Weapon.MP + Armor.MP + Shoes.MP;
+        }
         public int MPAmplification { get; set; }
         public int MP
         {
-            get => (MPBase + MPEquipment + MPForce) * (100 + MPAmplification) / 100;
+            get => (MPBase + MPEquipment) * (100 + MPAmplification) / 100;
         }
 
         public int VitalityBase { get; set; }
-        public int VitalityEquipment { get; set; }
-        public int VitalityForce { get; set; }
+        public int VitalityEquipment
+        {
+            get => Weapon.Vitiality + Armor.Vitiality + Shoes.Vitiality;
+        }
         public int VitalityAmplification { get; set; }
         public int Vitality
         {
-            get => (VitalityBase + VitalityEquipment + VitalityForce) * (100 + VitalityAmplification) / 100;
+            get => (VitalityBase + VitalityEquipment) * (100 + VitalityAmplification) / 100;
         }
 
         public int StrengthBase { get; set; }
-        public int StrengthEquipment { get; set; }
-        public int StrengthForce { get; set; }
+        public int StrengthEquipment
+        {
+            get => Weapon.Strength + Armor.Strength + Shoes.Strength;
+        }
         public int StrengthAmplification { get; set; }
         public int Strength
         {
-            get => (StrengthBase + StrengthEquipment + StrengthForce) * (100 + StrengthAmplification) / 100;
+            get => (StrengthBase + StrengthEquipment) * (100 + StrengthAmplification) / 100;
         }
 
         public int AgilityBase { get; set; }
-        public int AgilityEquipment { get; set; }
-        public int AgilityForce { get; set; }
+        public int AgilityEquipment
+        {
+            get => Weapon.Agility + Armor.Agility + Shoes.Agility;
+        }
         public int AgilityAmplification { get; set; }
         public int Agility
         {
-            get => (AgilityBase + AgilityEquipment + AgilityForce) * (100 + AgilityAmplification) / 100;
+            get => (AgilityBase + AgilityEquipment) * (100 + AgilityAmplification) / 100;
         }
 
         public int Attack { get; set; }
@@ -80,7 +104,6 @@ namespace WuLinZhi.Core.Character
 
         public void OnEquipmentChange(object sender, EventArgs e)
         {
-            HPEquipment = Weapon.HP + Armor.HP + Shoes.HP;
         }
 
         public void OnForceChange(object sender, EventArgs e)
@@ -90,13 +113,13 @@ namespace WuLinZhi.Core.Character
 
         public override string ToString()
         {
-            var options=new JsonSerializerOptions
+            var options = new JsonSerializerOptions
             {
-                Encoder=System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All),
-                WriteIndented=true,
-                IgnoreReadOnlyProperties=true,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All),
+                WriteIndented = true,
+                IgnoreReadOnlyProperties = true,
             };
-            var json=JsonSerializer.Serialize<MainCharacter>(this,options);
+            var json = JsonSerializer.Serialize<MainCharacter>(this, options);
             return json;
         }
 

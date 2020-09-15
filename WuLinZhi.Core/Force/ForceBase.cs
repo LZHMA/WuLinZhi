@@ -6,14 +6,6 @@ namespace WuLinZhi.Core.Force
 {
     public class ForceBase
     {
-        #region field
-        private int _potentialHP;
-        private int _potentialMP;
-        private int _potentialVitality;
-        private int _potentialStrength;
-        private int _potentialAgility;
-        #endregion
-
         #region property
         public ForceLevel Level { get; set; }
         public int Grade { get; set; }
@@ -22,11 +14,11 @@ namespace WuLinZhi.Core.Force
             get => ((int)Level * (20) + 60) * Grade;
         }
 
-        public int HP { get => Grade / 10 * _potentialHP; }
-        public int MP { get => Grade / 10 * _potentialMP; }
-        public int Vitality { get => Grade / 10 * _potentialVitality; }
-        public int Strength { get => Grade / 10 * _potentialStrength; }
-        public int Agility { get => Grade / 10 * _potentialAgility; }
+        public int HP { get; set; }
+        public int MP { get; set; }
+        public int Vitality { get; set; }
+        public int Strength { get; set; }
+        public int Agility { get; set; }
 
         public int MetalPhase { get; set; }
         public int WoodPhase { get; set; }

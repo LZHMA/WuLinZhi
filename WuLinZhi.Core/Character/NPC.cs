@@ -7,5 +7,10 @@ namespace WuLinZhi.Core.Character
         public int Vitality { get; set; }
         public int Strength { get; set; }
         public int Agility { get; set; }
+
+        public NPC ShallowClone()
+        {
+            return this.MemberwiseClone() as NPC;
+        }
     }
 }

@@ -21,9 +21,10 @@ namespace WuLinZhi.Core.Effects
 
     public enum EffectOccasion
     {
-        RoundStart,
-        Attacting,
-        Attacted,
-        RoundEnd,
+        FightStart=0,
+        RoundStart=1,
+        Attacting=2,
+        Attacted=3,
+        RoundEnd=4,
     }
 }

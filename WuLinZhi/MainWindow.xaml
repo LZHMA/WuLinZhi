@@ -4,9 +4,47 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WuLinZhi"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="800" Width="1200">
     <Grid>
-
+        <hc:SimplePanel Margin="22">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <hc:Card>
+                    <StackPanel>
+                        <TextBlock hc:BorderElement.CornerRadius="3">人物属性</TextBlock>
+                        <TextBlock x:Name="characterName" Width="50" hc:BorderElement.CornerRadius="3"/>
+                    </StackPanel>
+                </hc:Card>
+                <ToggleButton Margin="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="2" Content="Right" IsChecked="{Binding IsOpen,ElementName=DrawerRight}"/>
+            </Grid>
+            <hc:Drawer Name="DrawerRight" MaskCanClose="True">
+                <Border Background="{DynamicResource RegionBrush}" Width="300" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Button Command="hc:ControlCommands.Close" Grid.Row="0" HorizontalAlignment="Right" Foreground="{DynamicResource PrimaryTextBrush}" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource DeleteFillCircleGeometry}"/>
+                        <StackPanel Grid.Row="1">
+                            <Button Content="Restart" Click="NewGame" Style="{StaticResource ButtonPrimary}" Margin="0,10,0,0"/>
+                            <Button Content="Save" Style="{StaticResource ButtonPrimary}" Margin="0,10,0,0"/>
+                            <Button Content="Load" Style="{StaticResource ButtonPrimary}" Margin="0,10,0,0" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </hc:Drawer>
+        </hc:SimplePanel>
     </Grid>
 </Window>

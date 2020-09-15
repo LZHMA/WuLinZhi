@@ -16,8 +16,8 @@ namespace WuLinZhi.Core.Fight
 
         public Arena(MainCharacter mainCharacter, NPC npc)
         {
-            this._npc = npc;
-            this._mainCharacter = mainCharacter;
+            this._npc = npc.ShallowClone();
+            this._mainCharacter = mainCharacter.ShallowClone();
 
             MainCharacterHPUpperLimit = _mainCharacter.HP;
             MainCharacterHPCurrent = MainCharacterHPUpperLimit;
