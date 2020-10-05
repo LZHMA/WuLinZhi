@@ -9,7 +9,7 @@ namespace WuLinZhi.Core
 {
     public static class RecordWorker
     {
-        static String pathBase = @"../WuLinZhi.Core/Saves/Record";
+        static String pathBase = Directory.GetCurrentDirectory()+@"\Saves\Record";
 
         static JsonSerializerOptions serializerOptions = new JsonSerializerOptions
         {
@@ -47,13 +47,13 @@ namespace WuLinZhi.Core
             return character;
         }
 
-        public static void SaveCharacter(MainCharacter character, int index)
+        public static void SaveCharacter(MainCharacter character, int index=0)
         {
             var folderPath = pathBase + index;
             Directory.CreateDirectory(folderPath);
             var characterPath = folderPath + @"/Character.json";
+            Console.WriteLine(characterPath);
             string characterJson = JsonSerializer.Serialize<MainCharacter>(character, serializerOptions);
-            Console.WriteLine(characterJson);
             File.WriteAllText(characterPath, characterJson, Encoding.UTF8);
         }
     }

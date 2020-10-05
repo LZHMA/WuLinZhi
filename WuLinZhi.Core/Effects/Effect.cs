@@ -1,30 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WuLinZhi.Core.Fight;
+using WuLinZhi.Core.Character;
 
 namespace WuLinZhi.Core.Effects
 {
     public abstract class Effect
     {
-        public string Name { get; set; }
+        public static readonly Random EffectRandom;
         public EffectOccasion Occasion { get; set; }
         public int Chance { get; set; }
 
-        public bool Trigger()
+        internal bool TakeChance()
         {
-            var random = new Random().Next(100);
-            return random < Chance;
+            if (Chance >= 100)
+                return true;
+            return EffectRandom.Next(100) < Chance;
         }
 
-        public abstract void TakeEffect();
-    }
+        public abstract void TakeEffect(CharacterInFight source, CharacterInFight target);
 
-    public enum EffectOccasion
-    {
-        FightStart=0,
-        RoundStart=1,
-        Attacting=2,
-        Attacted=3,
-        RoundEnd=4,
+        public abstract string GetDescription();
     }
 }

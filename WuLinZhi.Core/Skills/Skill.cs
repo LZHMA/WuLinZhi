@@ -7,7 +7,7 @@ namespace WuLinZhi.Core.Skills
     public abstract class Skill
     {
         public String Name { get; set; }
-        public int ActionPoint { get; set; }
-        public int MP { get; set; }
+        public int ActionPointCost { get; set; }
+        public int MPCost { get; set; }
     }
 }

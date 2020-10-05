@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.Unicode;
-using WuLinZhi.Core.Equipment;
-using WuLinZhi.Core.Force;
+using WuLinZhi.Core.Forces;
+using WuLinZhi.Core.Skills;
 
 namespace WuLinZhi.Core.Character
 {
@@ -13,6 +14,8 @@ namespace WuLinZhi.Core.Character
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private string _name;
+        private int _hp,_mp,_vitality,_strength,_agility,_money;
+
         #region property
         public string Name
         {
@@ -20,95 +23,97 @@ namespace WuLinZhi.Core.Character
             set
             {
                 _name = value;
-                if(this.PropertyChanged!=null)
-                {
-                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Name"));
-                }
+                OnPropertyChanged(nameof(Name));
             }
         }
 
-        public int HPBase { get; set; }
-        public int HPEquipment
-        {
-            get => Weapon.HP + Armor.HP + Shoes.HP;
-        }
-        public int HPAmplification { get; set; }
         public int HP
         {
-            get => (HPBase + HPEquipment) * (100 + HPAmplification) / 100;
+            get => _hp;
+            set
+            {
+                _hp = value;
+                OnPropertyChanged(nameof(HP));
+            }
         }
 
-        public int MPBase { get; set; }
-        public int MPEquipment
-        {
-            get => Weapon.MP + Armor.MP + Shoes.MP;
-        }
-        public int MPAmplification { get; set; }
         public int MP
         {
-            get => (MPBase + MPEquipment) * (100 + MPAmplification) / 100;
+            get => _mp;
+            set
+            {
+                _mp = value;
+                OnPropertyChanged(nameof(MP));
+            }
         }
 
-        public int VitalityBase { get; set; }
-        public int VitalityEquipment
-        {
-            get => Weapon.Vitiality + Armor.Vitiality + Shoes.Vitiality;
-        }
-        public int VitalityAmplification { get; set; }
         public int Vitality
         {
-            get => (VitalityBase + VitalityEquipment) * (100 + VitalityAmplification) / 100;
+            get => _vitality;
+            set
+            {
+                _vitality = value;
+                OnPropertyChanged(nameof(Vitality));
+            }
         }
 
-        public int StrengthBase { get; set; }
-        public int StrengthEquipment
-        {
-            get => Weapon.Strength + Armor.Strength + Shoes.Strength;
-        }
-        public int StrengthAmplification { get; set; }
         public int Strength
         {
-            get => (StrengthBase + StrengthEquipment) * (100 + StrengthAmplification) / 100;
+            get => _strength;
+            set
+            {
+                _strength = value;
+                OnPropertyChanged(nameof(Strength));
+            }
         }
 
-        public int AgilityBase { get; set; }
-        public int AgilityEquipment
-        {
-            get => Weapon.Agility + Armor.Agility + Shoes.Agility;
-        }
-        public int AgilityAmplification { get; set; }
         public int Agility
         {
-            get => (AgilityBase + AgilityEquipment) * (100 + AgilityAmplification) / 100;
+            get => _agility;
+            set
+            {
+                _agility = value;
+                OnPropertyChanged(nameof(Agility));
+            }
         }
 
-        public int Attack { get; set; }
-        public int Defence { get; set; }
-        public int CriticalAttack
+        public int Money
         {
-            get => Agility / 50;
+            get => _money;
+            set
+            {
+                _money = value;
+                OnPropertyChanged(nameof(Money));
+            }
         }
-        public int CriticalDefence
-        {
-            get => Agility / 50;
-        }
 
+        public List<AttackSkill> AttackSkills { get; set; } = new List<AttackSkill>();
+        public List<SupportSkill> SupportSkills { get; set; } = new List<SupportSkill>();
 
-        public ICollection<ForceBase> Forces { get; set; }
-
-        public EquipmentBase Weapon { get; set; }
-        public EquipmentBase Armor { get; set; }
-        public EquipmentBase Shoes { get; set; }
+        public List<String> LearnedForces { get; } = new List<string>();
+        public List<String> EquippedForces { get; } = new List<string>();
 
         #endregion
-
-        public void OnEquipmentChange(object sender, EventArgs e)
+        protected void OnPropertyChanged(string name)
         {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        public void OnForceChange(object sender, EventArgs e)
+        
+        public void EquipForce(string force)
         {
-
+            if (EquippedForces.Count == 5)
+                return;
+            EquippedForces.Add(force);
+        }
+        public void UnEquipForce(string force)
+        {
+            EquippedForces.Remove(force);
+        }
+        public void ReplaceEquipedForce(string equiped, string toequip)
+        {
+            UnEquipForce(equiped);
+            EquipForce(toequip);
         }
 
         public override string ToString()

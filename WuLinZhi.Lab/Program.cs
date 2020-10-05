@@ -12,8 +12,7 @@ namespace WuLinZhi.Lab
     {
         static void Main(string[] args)
         {
-            var me = RecordWorker.Load(1);
-            Console.WriteLine(me);
+            SaveCharacter();
         }
         static void SaveCharacter()
         {
@@ -27,18 +26,21 @@ namespace WuLinZhi.Lab
                 VitalityBase = 300,
                 StrengthBase = 260,
                 AgilityBase = 200,
-                Weapon = new EquipmentBase
+                EquippedEquipments = new EquippedDict()
                 {
-                    Name = "轩辕剑",
-                    Type = EquipmentType.Weapon,
-                    HP = 200,
-                    MP = 100,
-                    Vitiality = 50,
-                    Strength = 30,
-                    Agility = 40,
-                    Price = 10,
+                    { "Weapon",new EquipmentBase{
+                        Name = "轩辕剑",
+                        Type = EquipmentType.Weapon,
+                        HP = 200,
+                        MP = 100,
+                        Vitiality = 50,
+                        Strength = 30,
+                        Agility = 40,
+                        Price = 10,}
+                    }
                 }
             };
+            Console.WriteLine(character);
             RecordWorker.SaveCharacter(character,1);
         }
 

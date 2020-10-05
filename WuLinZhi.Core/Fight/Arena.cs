@@ -1,66 +1,81 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using WuLinZhi.Core.Character;
 
 namespace WuLinZhi.Core.Fight
 {
     public class Arena
     {
-        private readonly NPC _npc;
-        private readonly MainCharacter _mainCharacter;
-
-        private int _mainCharacterHPCurrent;
-        private int _mainCharacterMPCurrent;
-        private int _mainCharacterShield;
-
-        public Arena(MainCharacter mainCharacter, NPC npc)
+        private readonly int _npcAttackChance = 70;
+        private readonly Random _arenaRandom=new Random();
+        public Arena(IFightable mainCharacter, IFightable npc)
         {
-            this._npc = npc.ShallowClone();
-            this._mainCharacter = mainCharacter.ShallowClone();
+            MainCharacterInFight = new CharacterInFight(mainCharacter);
+            NPCInFight = new CharacterInFight(npc);
 
-            MainCharacterHPUpperLimit = _mainCharacter.HP;
-            MainCharacterHPCurrent = MainCharacterHPUpperLimit;
-
-            MainCharacterMPUpperLimit = _mainCharacter.MP;
-            MainCharacterMPCurrent = MainCharacterMPUpperLimit;
+            FightStart();
+            PlayerRoundStart();
         }
 
-        public int MainCharacterHPUpperLimit { get; set; }
-        public int MainCharacterHPCurrent
+        public CharacterInFight MainCharacterInFight { get; }
+        public CharacterInFight NPCInFight { get; }
+
+        public bool PlayerPreparation { get; set; }
+
+        /// <summary>
+        /// The whole progress of the fight
+        /// </summary>
+        /// <returns>Whethear MainCharacter won or not</returns>
+        public void FightStart()
         {
-            get => _mainCharacterHPCurrent;
-            set
+            //Fight start
+            MainCharacterInFight.UseFightStartEffects();
+            NPCInFight.UseFightStartEffects();
+        }
+
+        public void PlayerRoundStart()
+        {
+            int shieldToNextRound = (int)(MainCharacterInFight.Shield * (MainCharacterInFight.ShieldRemainRate) / 100.0);
+            MainCharacterInFight.Shield = shieldToNextRound;
+            MainCharacterInFight.UseRoundStartEffects();
+            MainCharacterInFight.ActionPointCurrent = MainCharacterInFight.ActionPointCap;
+            PlayerPreparation = true;
+        }
+        public void PlayerRoundAct()
+        {
+            PlayerPreparation = false;
+            MainCharacterInFight.CastInstructedSupportSkills();
+            MainCharacterInFight.CastInstructedAttackSkills(NPCInFight);
+            MainCharacterInFight.UseRoundEndEffects();
+            NPCRound();
+
+        }
+        public void NPCRound()
+        {
+            int shieldToNextRound = (int)(NPCInFight.Shield * (NPCInFight.ShieldRemainRate) / 100.0);
+            NPCInFight.Shield = shieldToNextRound;
+            NPCInFight.UseRoundStartEffects();
+            if(_arenaRandom.Next(100)< _npcAttackChance)
             {
-                _mainCharacterHPCurrent = value < MainCharacterHPUpperLimit ? value : MainCharacterHPUpperLimit;
+                var skillIndex = _arenaRandom.Next(NPCInFight.AttackSkills.Count);
+                var skill = NPCInFight.AttackSkills[skillIndex];
+                NPCInFight.CastAttackSkill(skill, MainCharacterInFight);
             }
-        }
-
-        public int MainCharacterMPUpperLimit { get; set; }
-        public int MainCharacterMPCurrent
-        {
-            get => _mainCharacterMPCurrent;
-            set
+            else
             {
-                _mainCharacterMPCurrent = value < MainCharacterMPUpperLimit ? value : MainCharacterMPUpperLimit;
+                var skillIndex = _arenaRandom.Next(NPCInFight.SupportSkills.Count);
+                var skill = NPCInFight.SupportSkills[skillIndex];
+                NPCInFight.CastSupportSkill(skill);
             }
+            NPCInFight.UseRoundEndEffects();
+            PlayerRoundStart();
         }
 
-        public int MainCharacterShield
-        {
-            get => _mainCharacterShield;
-            set
-            {
-                _mainCharacterShield = value > 0 ? value : 0;
-            }
-        }
-
-        public bool GoThroughFightProgress()
-        {
-            return true;
-        }
-
-        void CastSkill(IFightable from, IFightable to)
+        public void EndFight(bool playerWin)
         {
 
         }
